@@ -25,10 +25,21 @@
         <p class="text-red-500 text-sm">{{ $message }}</p>
         @enderror
 
-        <button type="submit"
+        <button
+            type="submit"
             class="px-4 py-2 rounded-md text-white bg-blue-600 hover:bg-blue-700
-                        dark:bg-blue-500 dark:hover:bg-blue-600 transition">
-            Comment
+                dark:bg-blue-500 dark:hover:bg-blue-600 transition flex items-center justify-center"
+            wire:loading.attr="disabled"
+            wire:target="addComment"
+        >
+            <svg wire:loading wire:target="addComment" class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
+            </svg>
+
+            <span wire:loading.remove wire:target="addComment">
+                Comment
+            </span>
         </button>
     </form>
     @endauth
