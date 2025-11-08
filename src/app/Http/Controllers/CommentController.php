@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CommentRequest;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -30,11 +31,7 @@ class CommentController extends Controller {
      * 
      * POST /post/{post}/comment
      */
-    public function store (Request $request, Post $post) {
-        $request->validate([
-            'comment' => 'required|string',
-        ]);
-
+    public function store (CommentRequest $request, Post $post) {
         $post->comments()->create([
             'user_id' => Auth::id(),
             'comment' => $request->comment,
