@@ -30,5 +30,18 @@
         </div>
 
         @livewireScripts
+        
+        <script src="https://cdn.jsdelivr.net/npm/laravel-echo@^1.11.0/dist/echo.iife.js"></script>
+        <script src="https://js.pusher.com/7.2/pusher.min.js"></script>
+        <script>
+            window.Echo = new Echo({
+                broadcaster: 'pusher',
+                key: 'local',
+                wsHost: window.location.hostname,
+                wsPort: 6001,
+                forceTLS: false,
+                disableStats: true
+            });
+        </script>
     </body>
 </html>
