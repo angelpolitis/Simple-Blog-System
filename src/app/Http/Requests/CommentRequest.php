@@ -20,7 +20,7 @@ class CommentRequest extends FormRequest {
      */
     public function rules () : array {
         return [
-            'comment' => 'required|string',
+            'comment' => 'required|string|max:1000',
         ];
     }
 }

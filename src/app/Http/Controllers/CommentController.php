@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\CommentCreated;
 use App\Http\Requests\CommentRequest;
 use App\Models\Post;
 use Illuminate\Http\Request;
@@ -32,10 +33,12 @@ class CommentController extends Controller {
      * POST /post/{post}/comment
      */
     public function store (CommentRequest $request, Post $post) {
-        $post->comments()->create([
+        $comment = $post->comments()->create([
             'user_id' => Auth::id(),
             'comment' => $request->comment,
         ]);
+
+        broadcast(new CommentCreated($comment))->toOthers();
 
         return redirect()->route('post.show', $post);
     }
